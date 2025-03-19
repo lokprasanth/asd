@@ -1,72 +1,181 @@
-
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
+import { TextPlugin } from 'gsap/TextPlugin';
+
+gsap.registerPlugin(TextPlugin);
 
 const Hero = () => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [emoji, setEmoji] = useState('✨');
+  const [backgroundParticles, setBackgroundParticles] = useState([]);
+  const texts = ["Web Developer", "Think Different.", "Create the Future.", "Innovate Boldly."];
+  let textIndex = 0;
 
   useEffect(() => {
-    if (titleRef.current) {
-      gsap.to(titleRef.current, {
-        duration: 1.5,
-        text: "Welcome to NeonFlux",
-        ease: "power2.inOut",
-        delay: 0.5
-      });
+    // Text change animation
+    const titleRef = document.getElementById('title');
+    if (titleRef) {
+      const changeText = () => {
+        gsap.to(titleRef, {
+          duration: 1.5,
+          text: texts[textIndex],
+          ease: "power2.inOut",
+          onComplete: () => {
+            textIndex = (textIndex + 1) % texts.length;
+            setTimeout(changeText, 2000);
+          }
+        });
+      };
+      changeText();
     }
+
+    // Emoji change animation
+    const emojiInterval = setInterval(() => {
+      const emojis = ['✨', '🔥', '🚀', '💡', '🌟'];
+      setEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
+    }, 1500);
+
+    // Particle generation
+    const generateParticles = () => {
+      const particles = Array.from({ length: 200 }).map((_, index) => ({
+        id: index,
+        x: Math.random() * 100 + "%",
+        y: Math.random() * 100 + "%",
+        size: Math.random() * 3 + 1, // Star size range (1-3px)
+        opacity: Math.random() * 0.8 + 0.2, // Opacity for twinkling effect
+        speed: Math.random() * 1 + 0.5, // Speed for moving effect
+        directionX: Math.random() * 2 - 1, // Random horizontal direction
+        directionY: Math.random() * 2 - 1, // Random vertical direction
+      }));
+      setBackgroundParticles(particles);
+    };
+
+    generateParticles();
+
+    return () => clearInterval(emojiInterval);
   }, []);
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-      <div className="absolute inset-0 w-full h-full">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-black via-black/90 to-neon-purple/20 z-10"></div>
-        <div className="absolute -top-[40%] -left-[20%] w-[70%] h-[70%] rounded-full bg-neon-blue/10 blur-[120px] animate-pulse-slow"></div>
-        <div className="absolute -bottom-[30%] -right-[20%] w-[60%] h-[60%] rounded-full bg-neon-purple/10 blur-[120px] animate-pulse-slow animation-delay-2000"></div>
+    <section
+      id="home"
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(to bottom, #000, #111)',
+        overflow: 'hidden',
+        textAlign: 'center',
+        backgroundImage: 'url("path_to_background_image.jpg")', // Add your background image URL here
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Starry Universe Background */}
+      <div className="starry-background"></div>
+
+      {/* Render background particles */}
+      {backgroundParticles.map(particle => (
+        <div
+          key={particle.id}
+          className="particle"  // CSS class for animation
+          style={{
+            position: 'absolute',
+            top: particle.y,
+            left: particle.x,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            backgroundColor: 'white',
+            borderRadius: '50%',
+            opacity: particle.opacity,  // Keep opacity here for initial state
+            pointerEvents: 'none',
+            transform: `translate(-50%, -50%)`, // Initial transform for centering
+            animationDelay: `${Math.random() * 3}s`, // Random delay for alternating effect
+          }}
+        />
+      ))}
+
+      {/* Hero Content */}
+      <div style={{ position: 'relative', zIndex: 2, maxWidth: '800px', padding: '0 20px' }}>
+        <motion.h1
+          id="title"
+          style={{
+            fontSize: '4rem',
+            fontWeight: 'bold',
+            color: 'white',
+            marginBottom: '1rem',
+            letterSpacing: '-1px',
+            textShadow: '0px 4px 20px rgba(255, 255, 255, 0.3)',
+            transform: 'perspective(1000px) rotateX(10deg)',
+            transition: 'transform 0.5s ease-in-out',
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        ></motion.h1>
+
+        <motion.p
+          style={{
+            color: 'rgba(255, 255, 255, 0.7)',
+            fontSize: '1.5rem',
+            maxWidth: '700px',
+            margin: '0 auto 2rem',
+            lineHeight: '1.6',
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          Innovation that redefines the way you think, work, and create. {emoji}
+        </motion.p>
+
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5 }}>
+          <a
+            href="#explore"
+            style={{
+              display: 'inline-block',
+              padding: '12px 36px',
+              fontSize: '1.2rem',
+              fontWeight: 'bold',
+              color: '#000',
+              background: 'white',
+              borderRadius: '50px',
+              boxShadow: '0px 4px 20px rgba(255, 255, 255, 0.2)',
+              transition: 'transform 0.3s, box-shadow 0.3s',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.boxShadow = '0px 4px 30px rgba(255, 255, 255, 0.3)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0px 4px 20px rgba(255, 255, 255, 0.2)';
+            }}
+          >
+            Learn More
+          </a>
+        </motion.div>
       </div>
-      
-      <div className="container mx-auto px-4 z-20">
-        <div className="text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-6"
-          >
-            <h2 className="text-neon-blue text-xl md:text-2xl font-medium mb-3">Portfolio</h2>
-          </motion.div>
-          
-          <motion.h1
-            ref={titleRef}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 glitch-text"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          ></motion.h1>
-          
-          <motion.p
-            className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            Creating cutting-edge digital experiences with futuristic design and advanced technology
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            <a
-              href="#projects"
-              className="bg-gradient-to-r from-neon-blue to-neon-purple px-8 py-3 rounded-md text-white font-medium hover:shadow-glow transition-all duration-300 inline-block"
-            >
-              View Projects
-            </a>
-          </motion.div>
-        </div>
-      </div>
+
+      {/* Styles for particles animation */}
+      <style>{`
+        @keyframes blink {
+          0% {
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+
+        .particle {
+          animation: blink 3s alternate infinite;
+        }
+      `}</style>
     </section>
   );
 };

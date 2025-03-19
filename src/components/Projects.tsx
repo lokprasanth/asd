@@ -1,161 +1,137 @@
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { X } from "lucide-react";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
-type Project = {
-  id: number;
-  title: string;
-  category: string;
-  image: string;
-  description: string;
-};
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Neon Galaxy",
-    category: "Web Design",
-    image: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    description: "A futuristic web design project featuring glassmorphism and neon elements."
-  },
-  {
-    id: 2,
-    title: "Cyber Dashboard",
-    category: "UI/UX",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    description: "An advanced dashboard UI with dark mode and interactive data visualizations."
-  },
-  {
-    id: 3,
-    title: "Quantum App",
-    category: "Development",
-    image: "https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    description: "A React Native mobile application with gesture-based interactions."
-  },
-  {
-    id: 4,
-    title: "Flux Motion",
-    category: "Animation",
-    image: "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    description: "A collection of advanced animations created using GSAP and Three.js."
-  },
-  {
-    id: 5,
-    title: "Synthwave Portfolio",
-    category: "Web Design",
-    image: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
-    description: "A retro-futuristic portfolio design with synthwave aesthetics."
-  },
-  {
-    id: 6,
-    title: "Neural Interface",
-    category: "UI/UX",
-    image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    description: "A concept UI for a neural interface system with minimalist design."
-  }
+const projectLinks = [
+  { name: "Project Alpha", url: "https://example.com/alpha", description: "A cutting-edge AI project.", image: "https://via.placeholder.com/300" },
+  { name: "Project Beta", url: "https://example.com/beta", description: "An advanced data analytics tool.", image: "https://via.placeholder.com/300" },
+  { name: "Project Gamma", url: "https://example.com/gamma", description: "A revolutionary cloud-based service.", image: "https://via.placeholder.com/300" },
+  { name: "Project Delta", url: "https://example.com/delta", description: "Next-gen cybersecurity solutions.", image: "https://via.placeholder.com/300" },
 ];
 
-const ProjectCard = ({ project }: { project: Project }) => {
+const GrokReplica = () => {
+  const [particles, setParticles] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [sparks, setSparks] = useState([]);
+  const [backgroundParticles, setBackgroundParticles] = useState([]);
+
+  useEffect(() => {
+    const generateParticles = () => {
+      const newParticles = Array.from({ length: 50 }).map((_, index) => ({
+        id: index,
+        angle: (index / 50) * 360,
+        distance: Math.random() * 50 + 75,
+        size: Math.random() * 4 + 2,
+        speed: Math.random() * 10 + 15,
+        project: index % 10 === 0 ? projectLinks[(index / 10) % projectLinks.length] : null,
+      }));
+      setParticles(newParticles);
+    };
+    
+    const generateBackgroundParticles = () => {
+      const newBackgroundParticles = Array.from({ length: 100 }).map((_, index) => ({
+        id: index,
+        x: Math.random() * 100 + "%",
+        y: Math.random() * 100 + "%",
+        size: Math.random() * 3 + 1,
+        opacity: Math.random() * 0.8 + 0.2,
+      }));
+      setBackgroundParticles(newBackgroundParticles);
+    };
+
+    generateParticles();
+    generateBackgroundParticles();
+  }, []);
+
+  const handleButtonClick = (url) => {
+    setSparks(
+      Array.from({ length: 20 }).map((_, index) => ({
+        id: index,
+        x: Math.random() * 100 - 50,
+        y: Math.random() * 100 - 50,
+        size: Math.random() * 6 + 3,
+      }))
+    );
+    setTimeout(() => setSparks([]), 800);
+    setTimeout(() => window.open(url, "_blank"), 300);
+  };
+
   return (
-    <motion.div
-      layoutId={`project-${project.id}`}
-      className="rounded-xl overflow-hidden group relative"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -10 }}
-      viewport={{ once: true }}
-    >
-      <div className="aspect-video overflow-hidden">
-        <div 
-          className="w-full h-full bg-cover bg-center transform group-hover:scale-110 transition-transform duration-500" 
-          style={{ backgroundImage: `url(${project.image})` }}
-        ></div>
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="absolute bottom-0 left-0 p-6">
-          <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-          <p className="text-gray-300 text-sm mb-3">{project.description}</p>
-          <span className="inline-block bg-neon-blue/20 backdrop-blur-sm text-neon-blue px-3 py-1 rounded-full text-xs">
-            {project.category}
-          </span>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-const Projects = () => {
-  const [filter, setFilter] = useState('All');
-  const categories = ['All', 'Web Design', 'UI/UX', 'Development', 'Animation'];
-
-  const filteredProjects = filter === 'All' 
-    ? projects 
-    : projects.filter(project => project.category === filter);
-
-  return (
-    <section id="projects" className="py-20 bg-dark-bg relative">
-      <div className="container mx-auto px-4">
+    <section id="projects" className="bg-black text-white min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-10">
+      {/* Background Particles */}
+      {backgroundParticles.map((particle) => (
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">Featured <span className="text-neon-purple">Projects</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Explore my latest work showcasing innovative design and development solutions.
-          </p>
-        </motion.div>
+          key={particle.id}
+          className="absolute bg-white rounded-full"
+          style={{
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            top: particle.y,
+            left: particle.x,
+            opacity: particle.opacity,
+          }}
+          animate={{ opacity: [0.2, 0.8, 0.2] }}
+          transition={{ duration: Math.random() * 3 + 2, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category, index) => (
-            <motion.button
-              key={index}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                filter === category
-                  ? 'bg-gradient-to-r from-neon-blue to-neon-purple text-white'
-                  : 'bg-black/50 text-gray-400 hover:text-white backdrop-blur-md'
-              }`}
-              onClick={() => setFilter(category)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+      <h1 className="text-4xl font-bold text-blue-400 mb-6">Projects</h1>
+      <div className={`flex ${selectedProject ? 'justify-between' : 'justify-center'} items-center w-full max-w-6xl transition-all duration-500`}>
+        {/* Rotating Galaxy Effect */}
+        <motion.div
+          className="relative w-96 h-96 flex items-center justify-center"
+          animate={{ rotate: 360 }}
+          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+        >
+          {particles.map((particle) => (
+            <motion.div
+              key={particle.id}
+              className="absolute bg-blue-400 rounded-full"
+              style={{ width: `${particle.size}px`, height: `${particle.size}px`, top: "50%", left: "50%", transformOrigin: "center" }}
             >
-              {category}
-            </motion.button>
+              <motion.div
+                style={{ position: "absolute", width: "100%", height: "100%", transform: `rotate(${particle.angle}deg) translate(${particle.distance}px)` }}
+              >
+                <div className="w-full h-full bg-blue-400 rounded-full"></div>
+                <div className="absolute w-[1px] bg-blue-300" style={{ height: `${particle.distance}px`, top: `-${particle.distance}px`, left: "50%", transform: "translateX(-50%)" }}></div>
+                {particle.project && (
+                  <button
+                    onClick={() => setSelectedProject(particle.project)}
+                    className="absolute w-8 h-8 bg-gray-800 text-white text-xs flex items-center justify-center rounded-md shadow-md hover:bg-gray-600"
+                    style={{ top: `-${particle.distance}px`, left: "50%", transform: "translateX(-50%)" }}
+                  >
+                    {particle.project.name}
+                  </button>
+                )}
+              </motion.div>
+            </motion.div>
           ))}
-        </div>
-
-        <AnimatePresence>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        </AnimatePresence>
-
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <a
-            href="#contact"
-            className="inline-flex items-center text-neon-blue hover:text-neon-purple transition-colors"
-          >
-            <span className="mr-2">Interested in working together?</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
         </motion.div>
+
+        {/* Project Details Panel */}
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            className="w-96 bg-gradient-to-br from-black to-blue-900 p-6 rounded-2xl shadow-lg ml-10 relative border border-gray-600 text-white backdrop-blur-lg space-y-4 overflow-hidden"
+          >
+            <button onClick={() => setSelectedProject(null)} className="absolute top-3 right-3 text-gray-300 hover:text-white">
+              <X size={20} />
+            </button>
+            <h2 className="text-3xl font-bold mb-2 text-blue-400 tracking-wide uppercase">{selectedProject.name}</h2>
+            <img src={selectedProject.image} alt={selectedProject.name} className="w-full h-40 object-cover rounded-lg shadow-md" />
+            <p className="text-gray-300 text-lg leading-relaxed">{selectedProject.description}</p>
+            <div className="relative">
+              <button onClick={() => handleButtonClick(selectedProject.url)} className="relative block mt-4 text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-lg text-center shadow-lg hover:opacity-80 transition transform hover:scale-105 border border-blue-400">
+                Explore the Project
+              </button>
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   );
 };
 
-export default Projects;
+export default GrokReplica;

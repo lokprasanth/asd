@@ -1,62 +1,89 @@
-
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
+  const [visitorCount, setVisitorCount] = useState(100); // Default visitor count
 
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
+    // Simulating visitor count increase (Replace with API call for real visitors)
+    const interval = setInterval(() => {
+      setVisitorCount((prev) => prev + Math.floor(Math.random() * 5) + 1);
+    }, 3000); // Update every 3 seconds
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrolled]);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <motion.nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <motion.div
-          className="text-2xl font-bold text-white"
-          whileHover={{ scale: 1.05 }}
-        >
-          <span className="text-neon-blue">Neon</span>Flux
-        </motion.div>
-        <div className="hidden md:flex space-x-8">
-          {['Home', 'About', 'Projects', 'Contact'].map((item) => (
-            <motion.a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-white hover:text-neon-blue transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {item}
-            </motion.a>
-          ))}
-        </div>
-        <div className="md:hidden">
-          <button className="text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </motion.nav>
+    <div style={{ position: "fixed", width: "100%", top: "20px", display: "flex", justifyContent: "center", zIndex: 100 }}>
+      {/* Navbar Section - Horizontally Centered */}
+      <motion.nav
+        style={{
+          background: "rgba(20, 20, 20, 0.8)",
+          backdropFilter: "blur(20px)",
+          padding: "1rem 2.5rem",
+          display: "flex",
+          alignItems: "center",
+          borderRadius: "16px",
+          boxShadow: "0px 12px 40px rgba(0, 0, 0, 0.25)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+        }}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        {["Home", "About", "Projects", "Contact"].map((item) => (
+          <motion.a
+            key={item}
+            href={`#${item.toLowerCase()}`}
+            style={{
+              color: "white",
+              textDecoration: "none",
+              fontSize: "1.1rem",
+              fontWeight: "600",
+              transition: "all 0.3s ease-in-out",
+              padding: "12px 24px",
+              borderRadius: "10px",
+              margin: "0 12px",
+              background: "rgba(50, 50, 50, 0.6)",
+              display: "inline-block",
+              letterSpacing: "1px",
+              textTransform: "uppercase",
+            }}
+            whileHover={{
+              scale: 1.1,
+              background: "rgba(80, 80, 80, 0.9)",
+              boxShadow: "0px 4px 20px rgba(100, 100, 100, 0.5)",
+              color: "#fff",
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {item}
+          </motion.a>
+        ))}
+      </motion.nav>
+
+      {/* Visitor Count in the Top-Right Corner */}
+      <motion.div
+        style={{
+          position: "fixed",
+          top: "20px",
+          right: "20px",
+          background: "rgba(20, 20, 20, 0.9)",
+          color: "white",
+          padding: "6px 10px",
+          borderRadius: "10px",
+          fontSize: "1rem",
+          fontWeight: "bold",
+          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.3)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+        }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        Visit: {visitorCount}
+      </motion.div>
+    </div>
   );
 };
 

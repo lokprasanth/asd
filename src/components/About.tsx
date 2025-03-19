@@ -1,122 +1,109 @@
-
-import { motion } from 'framer-motion';
-
-const AboutCard = ({ title, icon, description }: { title: string; icon: string; description: string }) => {
-  return (
-    <motion.div
-      className="bg-black/50 backdrop-blur-lg border border-gray-800 p-6 rounded-xl hover:shadow-glow hover:border-neon-blue/50 transition-all duration-300"
-      whileHover={{ y: -10 }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-    >
-      <div className="text-neon-blue mb-4 text-3xl">{icon}</div>
-      <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
-      <p className="text-gray-400">{description}</p>
-    </motion.div>
-  );
-};
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const About = () => {
-  const cards = [
-    {
-      title: "UI/UX Design",
-      icon: "✨",
-      description: "Creating intuitive and engaging user experiences with cutting-edge design principles."
-    },
-    {
-      title: "Web Development",
-      icon: "💻",
-      description: "Building responsive and performant web applications using modern technologies."
-    },
-    {
-      title: "Animation",
-      icon: "🎬",
-      description: "Bringing interfaces to life with smooth animations and interactive elements."
-    },
-    {
-      title: "Responsive Design",
-      icon: "📱",
-      description: "Ensuring perfect experiences across all devices and screen sizes."
-    }
-  ];
+  const [bgColor, setBgColor] = useState("bg-black");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 300) {
+        setBgColor("bg-black");
+      } else {
+        setBgColor("bg-black");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-b from-black to-dark-bg relative">
-      <div className="container mx-auto px-4">
+    <section
+      id="about"
+      className={`relative min-h-screen flex flex-col justify-center items-center transition-colors duration-500 ${bgColor} text-white overflow-hidden`}
+    >
+      {/* Dynamic Background Glow */}
+      <div className="absolute inset-0 flex justify-center items-center">
+        <div className="absolute w-[700px] h-[700px] bg-gray-500 opacity-30 blur-[200px] rounded-full animate-pulse" />
+        <div className="absolute w-[500px] h-[500px] bg-blue-500 opacity-20 blur-[150px] rounded-full animate-bounce" />
+      </div>
+
+      <div className="container mx-auto px-6 lg:px-20 relative z-10">
+        {/* Title Section with Animated Glow */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-white">About <span className="text-neon-blue">Me</span></h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            I'm a passionate digital creator focused on building modern, interactive, and visually stunning web experiences.
+          <h2 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 drop-shadow-[0_0_20px_rgba(128,0,128,0.6)] animate-glow">
+            Beyond Limits.
+          </h2>
+          <p className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto leading-relaxed">
+            Immersive digital experiences blending motion, interactivity, and design innovation.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cards.map((card, index) => (
-            <AboutCard 
-              key={index} 
-              title={card.title} 
-              icon={card.icon} 
-              description={card.description} 
-            />
-          ))}
+        {/* 3D Interactive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          {/* Image with 3D Hover Effect */}
+          <motion.div
+            className="relative group"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative w-full h-[450px] rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+              <img
+                src="https://source.unsplash.com/600x600/?cyberpunk,futuristic"
+                alt="Futuristic Vision"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-500 to-black opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+            </div>
+          </motion.div>
+
+          {/* Text Side with Floating Effect */}
+          <motion.div
+            className="space-y-6 text-left"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-4xl font-semibold text-white drop-shadow-md">Who Am I?</h3>
+            <p className="text-gray-400 text-lg leading-relaxed">
+              A creative visionary, shaping futuristic interfaces and engaging digital experiences.
+            </p>
+            <p className="text-gray-400 text-lg">
+              Whether it’s <span className="text-purple-400">UI/UX</span>, <span className="text-blue-400">web development</span>, or <span className="text-pink-400">motion design</span>, my goal is to craft experiences that feel intuitive and powerful.
+            </p>
+          </motion.div>
         </div>
 
-        <motion.div
-          className="mt-16 bg-black/30 backdrop-blur-md p-8 rounded-xl border border-gray-800"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-bold mb-4 text-white">My <span className="text-neon-blue">Journey</span></h3>
-              <p className="text-gray-400 mb-4">
-                With over 5 years of experience in digital design and development, I've worked on projects ranging from small business websites to complex web applications.
-              </p>
-              <p className="text-gray-400">
-                My passion lies in creating seamless user experiences that combine aesthetic appeal with functional design, always staying ahead of the latest industry trends and technologies.
-              </p>
-            </div>
-            <div className="space-y-4">
-              <div className="flex flex-col">
-                <div className="flex justify-between mb-1">
-                  <span className="text-white">UI/UX Design</span>
-                  <span className="text-neon-blue">90%</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-full h-2.5">
-                  <div className="bg-gradient-to-r from-neon-blue to-neon-purple h-2.5 rounded-full" style={{ width: '90%' }}></div>
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <div className="flex justify-between mb-1">
-                  <span className="text-white">React Development</span>
-                  <span className="text-neon-blue">85%</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-full h-2.5">
-                  <div className="bg-gradient-to-r from-neon-blue to-neon-purple h-2.5 rounded-full" style={{ width: '85%' }}></div>
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <div className="flex justify-between mb-1">
-                  <span className="text-white">Animation</span>
-                  <span className="text-neon-blue">80%</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-full h-2.5">
-                  <div className="bg-gradient-to-r from-neon-blue to-neon-purple h-2.5 rounded-full" style={{ width: '80%' }}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        {/* Floating 3D Stats */}
+        <div className="flex flex-wrap justify-center mt-20 gap-12">
+          {[
+            { title: "Projects", number: "50+" },
+            { title: "Years of Experience", number: "5+" },
+            { title: "Happy Clients", number: "100%" },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              className="text-center bg-opacity-30 bg-gray-800 rounded-2xl p-8 backdrop-blur-lg shadow-2xl border border-gray-700 hover:scale-110 hover:shadow-gray-500 transition-transform duration-500 animate-float"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-5xl font-bold text-white drop-shadow-md">{stat.number}</h3>
+              <p className="text-gray-400 text-lg">{stat.title}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
