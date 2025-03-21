@@ -8,11 +8,13 @@ gsap.registerPlugin(TextPlugin);
 const Hero = () => {
   const [emoji, setEmoji] = useState('✨');
   const [backgroundParticles, setBackgroundParticles] = useState([]);
-  const texts = ["Web Developer", "Think Different.", "Create the Future.", "Innovate Boldly."];
+  const texts = ["galaxy", "Think Different.", "Create the Future.", "Innovate Boldly."];
   let textIndex = 0;
 
   useEffect(() => {
-    // Text change animation
+    document.documentElement.style.overflowX = 'hidden';
+    document.body.style.overflowX = 'hidden';
+
     const titleRef = document.getElementById('title');
     if (titleRef) {
       const changeText = () => {
@@ -29,23 +31,18 @@ const Hero = () => {
       changeText();
     }
 
-    // Emoji change animation
     const emojiInterval = setInterval(() => {
       const emojis = ['✨', '🔥', '🚀', '💡', '🌟'];
       setEmoji(emojis[Math.floor(Math.random() * emojis.length)]);
     }, 1500);
 
-    // Particle generation
     const generateParticles = () => {
-      const particles = Array.from({ length: 200 }).map((_, index) => ({
+      const particles = Array.from({ length: 150 }).map((_, index) => ({
         id: index,
-        x: Math.random() * 100 + "%",
-        y: Math.random() * 100 + "%",
-        size: Math.random() * 3 + 1, // Star size range (1-3px)
-        opacity: Math.random() * 0.8 + 0.2, // Opacity for twinkling effect
-        speed: Math.random() * 1 + 0.5, // Speed for moving effect
-        directionX: Math.random() * 2 - 1, // Random horizontal direction
-        directionY: Math.random() * 2 - 1, // Random vertical direction
+        x: `${Math.random() * 95 + 2}%`,
+        y: `${Math.random() * 95 + 2}%`,
+        size: Math.random() * 3 + 1,
+        opacity: Math.random() * 0.8 + 0.2,
       }));
       setBackgroundParticles(particles);
     };
@@ -60,26 +57,28 @@ const Hero = () => {
       id="home"
       style={{
         position: 'relative',
+        width: '100%',
         minHeight: '100vh',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         background: 'linear-gradient(to bottom, #000, #111)',
         overflow: 'hidden',
         textAlign: 'center',
-        backgroundImage: 'url("path_to_background_image.jpg")', // Add your background image URL here
+        backgroundImage: 'url("path_to_background_image.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      {/* Starry Universe Background */}
+      {/* Starry Background */}
       <div className="starry-background"></div>
 
-      {/* Render background particles */}
+      {/* Particles */}
       {backgroundParticles.map(particle => (
         <div
           key={particle.id}
-          className="particle"  // CSS class for animation
+          className="particle"
           style={{
             position: 'absolute',
             top: particle.y,
@@ -88,10 +87,9 @@ const Hero = () => {
             height: `${particle.size}px`,
             backgroundColor: 'white',
             borderRadius: '50%',
-            opacity: particle.opacity,  // Keep opacity here for initial state
+            opacity: particle.opacity,
             pointerEvents: 'none',
-            transform: `translate(-50%, -50%)`, // Initial transform for centering
-            animationDelay: `${Math.random() * 3}s`, // Random delay for alternating effect
+            transform: 'translate( -50%, -50%)',
           }}
         />
       ))}
@@ -101,14 +99,12 @@ const Hero = () => {
         <motion.h1
           id="title"
           style={{
-            fontSize: '4rem',
+            fontSize: '3rem',
             fontWeight: 'bold',
             color: 'white',
             marginBottom: '1rem',
             letterSpacing: '-1px',
             textShadow: '0px 4px 20px rgba(255, 255, 255, 0.3)',
-            transform: 'perspective(1000px) rotateX(10deg)',
-            transition: 'transform 0.5s ease-in-out',
           }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -118,7 +114,7 @@ const Hero = () => {
         <motion.p
           style={{
             color: 'rgba(255, 255, 255, 0.7)',
-            fontSize: '1.5rem',
+            fontSize: '1.2rem',
             maxWidth: '700px',
             margin: '0 auto 2rem',
             lineHeight: '1.6',
@@ -158,22 +154,107 @@ const Hero = () => {
         </motion.div>
       </div>
 
+      {/* Responsive Sun Effect */}
+      <div
+  className="sun-effect"
+  style={{
+    position: 'absolute',
+    top: '70%',
+    right: '-5vw', 
+    width: 'clamp(150px, 25vw, 300px)', 
+    height: 'clamp(150px, 25vw, 300px)', 
+    background: `
+      radial-gradient(circle, 
+        rgba(255, 230, 0, 1) 25%, 
+        rgba(255, 140, 0, 0.9) 50%, 
+        rgba(255, 60, 0, 0.8) 70%, 
+        rgba(100, 0, 0, 0.6) 85%, 
+        rgba(0, 0, 0, 0) 95%
+      ),
+      repeating-radial-gradient(circle, 
+        rgba(255, 200, 0, 0.6) 3%, 
+        rgba(255, 50, 0, 0.7) 7%, 
+        rgba(100, 0, 0, 0.4) 12%
+      ),
+      radial-gradient(circle at 30% 40%, 
+        rgba(255, 255, 255, 0.1) 5%, 
+        rgba(255, 100, 0, 0.2) 15%, 
+        rgba(0, 0, 0, 0) 50%
+      )
+    `,
+    borderRadius: '50%',
+    boxShadow: `
+      0px 0px 100px rgba(255, 200, 0, 0.9), 
+      0px 0px 140px rgba(255, 80, 0, 0.8),
+      0px 0px 180px rgba(255, 30, 0, 0.7)
+    `,
+    animation: 'burningEffect 2s infinite alternate ease-in-out, shapeWarp 4s infinite alternate ease-in-out',
+    transform: 'translateY(-50%)',
+    zIndex: 1,
+  }}
+></div>
+
+<style>
+  {`
+    @keyframes burningEffect {
+      0% {
+        filter: blur(6px) brightness(1);
+      }
+      50% {
+        filter: blur(9px) brightness(1.3);
+      }
+      100% {
+        filter: blur(6px) brightness(1);
+      }
+    }
+
+    @keyframes shapeWarp {
+      0% {
+        border-radius: 50%;
+      }
+      50% {
+        border-radius: 48% 52% 50% 52%;
+      }
+      100% {
+        border-radius: 50%;
+      }
+    }
+  `}
+</style>
+
+
       {/* Styles for particles animation */}
       <style>{`
         @keyframes blink {
-          0% {
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
+          0% { opacity: 0; }
+          50% { opacity: 1; }
+          100% { opacity: 0; }
         }
 
         .particle {
           animation: blink 3s alternate infinite;
+        }
+
+        html, body {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          overflow-x: hidden;
+        }
+
+        @media (max-width: 768px) {
+          #title {
+            font-size: 2.5rem !important;
+          }
+
+          .sun-effect {
+            right: -15vw; /* Moves it slightly off-screen */
+            width: 150px;
+            height: 150px;
+            filter: blur(10px); /* Reduces blur for smaller screens */
+            box-shadow: 0px 0px 40px rgba(255,255,0,0.8), 0px 0px 120px rgba(255,165,0,0.9);
+
+          }
         }
       `}</style>
     </section>

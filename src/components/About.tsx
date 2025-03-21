@@ -23,14 +23,71 @@ const About = () => {
       id="about"
       className={`relative min-h-screen flex flex-col justify-center items-center transition-colors duration-500 ${bgColor} text-white overflow-hidden`}
     >
-      {/* Dynamic Background Glow */}
-      <div className="absolute inset-0 flex justify-center items-center">
-        <div className="absolute w-[700px] h-[700px] bg-gray-500 opacity-30 blur-[200px] rounded-full animate-pulse" />
-        <div className="absolute w-[500px] h-[500px] bg-blue-500 opacity-20 blur-[150px] rounded-full animate-bounce" />
+      {/* Starry Background Effect */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+        <div 
+          className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-80 bg-cover bg-center"
+        />
       </div>
 
+      {/* Small Background Planets */}
+{/* Small Background Planets - Realistic Colors with Fixed Positions & Proper Rotation */}
+{[...Array(8)].map((_, index) => {
+  const planetImages = [
+    "https://upload.wikimedia.org/wikipedia/commons/9/97/Mercury_in_true_color.jpg", // Mercury ⚪ (1st)
+    "https://upload.wikimedia.org/wikipedia/commons/8/85/Venus_globe.jpg", // Venus 🟡 (2nd)
+    "https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg", // Earth 🌍 (3rd)
+    "https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg", // Mars 🔴 (4th)
+    "https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg", // Jupiter 🟠 (5th)
+    "https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg", // Saturn 🟠 with rings (6th)
+    "https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg", // Uranus 🟣 (7th)
+    "https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg", // Neptune 🔵 (8th)
+  ];
+
+  // Fixed planet positions (from closest to farthest from Sun)
+  const fixedPositions = [
+    { top: "1%", left: "33%" }, // Mercury
+    { top: "45%", left: "35%" }, // Venus
+    { top: "25%", left: "28%" }, // Earth
+    { top: "45%", left: "80%" }, // Mars
+    { top: "55%", left: "50%" }, // Jupiter
+    { top: "70%", left: "24%" }, // Saturn
+    { top: "85%", left: "5%" }, // Uranus
+    { top: "82%", left: "85%" }, // Neptune
+  ];
+
+  return (
+    <motion.div
+      key={index}
+      className="absolute opacity-90"
+      style={{
+        width: `${40 + index * 10}px`, // Different sizes but fixed
+        height: `${40 + index * 10}px`,
+        top: fixedPositions[index].top, // Uses fixed positions
+        left: fixedPositions[index].left,
+        transform: "translate(-50%, -50%)",
+        borderRadius: "50%", // Keeps it circular
+        backgroundImage: `url(${planetImages[index]})`, // Uses real planet textures
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        filter: "brightness(1.1) contrast(1.2)", // Enhances visibility
+        boxShadow: `0 0 15px rgba(255, 255, 255, 0.3)`, // Soft glow
+      }}
+      animate={{
+        y: [-5, 5, -5], // Floating motion
+        rotate: [0, 360], // Now rotation will be visible
+      }}
+      transition={{
+        y: { duration: 4 + Math.random() * 2, repeat: Infinity, ease: "easeInOut" },
+        rotate: { duration: 20, repeat: Infinity, ease: "linear" }, // Smooth rotation
+      }}
+    />
+  );
+})}
+
+
       <div className="container mx-auto px-6 lg:px-20 relative z-10">
-        {/* Title Section with Animated Glow */}
+        {/* Title Section */}
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
@@ -38,7 +95,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 drop-shadow-[0_0_20px_rgba(128,0,128,0.6)] animate-glow">
+          <h2 className="text-6xl font-extrabold text-white drop-shadow-lg">
             Beyond Limits.
           </h2>
           <p className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto leading-relaxed">
@@ -58,15 +115,14 @@ const About = () => {
           >
             <div className="relative w-full h-[450px] rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl">
               <img
-                src="https://source.unsplash.com/600x600/?cyberpunk,futuristic"
+                src="https://unsplash.com/photos/blue-and-black-galaxy-digital-wallpaper-qtRF_RxCAo0"
                 alt="Futuristic Vision"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-500 to-black opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
             </div>
           </motion.div>
 
-          {/* Text Side with Floating Effect */}
+          {/* Text Side */}
           <motion.div
             className="space-y-6 text-left"
             initial={{ opacity: 0, x: 50 }}
@@ -86,11 +142,7 @@ const About = () => {
 
         {/* Floating 3D Stats */}
         <div className="flex flex-wrap justify-center mt-20 gap-12">
-          {[
-            { title: "Projects", number: "50+" },
-            { title: "Years of Experience", number: "5+" },
-            { title: "Happy Clients", number: "100%" },
-          ].map((stat, index) => (
+          {[{ title: "Projects", number: "50+" }, { title: "planets", number: "678" }, { title: "Happys", number: "100%" }].map((stat, index) => (
             <motion.div
               key={index}
               className="text-center bg-opacity-30 bg-gray-800 rounded-2xl p-8 backdrop-blur-lg shadow-2xl border border-gray-700 hover:scale-110 hover:shadow-gray-500 transition-transform duration-500 animate-float"
