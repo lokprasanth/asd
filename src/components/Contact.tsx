@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const About = () => {
   const [glowLines, setGlowLines] = useState([]);
+  const [stars, setStars] = useState([]);
 
   useEffect(() => {
     const generateGlowLines = () => {
@@ -15,12 +16,45 @@ const About = () => {
       }));
       setGlowLines(newLines);
     };
+
+    const generateStars = () => {
+      const newStars = Array.from({ length: 50 }, (_, i) => ({
+        id: i,
+        x: `${Math.random() * 100}%`,
+        y: `${Math.random() * 100}%`,
+        size: Math.random() * 3 + 1,
+        opacity: Math.random() * 0.5 + 0.3,
+      }));
+      setStars(newStars);
+    };
+
     generateGlowLines();
+    generateStars();
   }, []);
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center bg-black text-white overflow-hidden px-6 md:px-8 lg:px-12">
       {/* Background Glow Lines */}
+      {stars.map((star) => (
+        <motion.div
+          key={star.id}
+          className="absolute bg-white rounded-full"
+          style={{
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            top: star.y,
+            left: star.x,
+            opacity: star.opacity,
+          }}
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{
+            duration: Math.random() * 3 + 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+
       {glowLines.map((line) => (
         <motion.div
           key={line.id}
@@ -43,7 +77,7 @@ const About = () => {
 
       {/* Holographic Title */}
       <motion.h1
-        className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500 tracking-widest uppercase text-center"
+        className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-700 tracking-widest uppercase text-center"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2 }}
@@ -78,7 +112,7 @@ const About = () => {
               Welcome to the <strong>next-gen</strong> space where reality
               bends, and possibilities expand.
             </p>
-            <button className="relative px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-medium bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg shadow-xl hover:opacity-80 transition transform hover:scale-105 border border-blue-400">
+            <button className="relative px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-medium bg-gradient-to-r from-black to-gray-400 rounded-lg shadow-xl hover:opacity-80 transition transform hover:scale-105 border border-gray-900">
               Discover More
             </button>
           </motion.div>
@@ -90,15 +124,15 @@ const About = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-30 blur-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-black to-purple-900 opacity-40 blur-3xl"></div>
             <motion.div
-              className="w-40 md:w-60 h-40 md:h-60 rounded-full bg-opacity-10 border border-blue-400 flex items-center justify-center shadow-[0_0_60px_rgba(0,255,255,0.4)]"
+              className="w-40 md:w-60 h-40 md:h-60 rounded-full bg-opacity-10 border border-gray-700 flex items-center justify-center shadow-[0_0_60px_rgba(130,0,295,0.9)]"
               animate={{ rotate: [0, 360] }}
               transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
             >
               <img
-                src="https://source.unsplash.com/700x700/?galaxy,ai"
-                alt="Futuristic Sphere"
+                src="https://unsplash.com/photos/purple-and-black-galaxy-illustration-uXchDIKs4qI"
+                alt="Futuristic"
                 className="w-full h-full object-cover rounded-full shadow-2xl"
               />
             </motion.div>
@@ -122,22 +156,22 @@ const About = () => {
         <form className="mt-6 md:mt-8 space-y-4 md:space-y-6">
           <input
             type="text"
-            placeholder="Your Name"
-            className="w-full px-4 md:px-5 py-3 text-base md:text-lg bg-transparent border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Name"
+            className="w-full px-4 md:px-5 py-3 text-base md:text-lg bg-transparent border border-gray-900 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
           />
           <input
             type="email"
-            placeholder="Your Email"
-            className="w-full px-4 md:px-5 py-3 text-base md:text-lg bg-transparent border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Email"
+            className="w-full px-4 md:px-5 py-3 text-base md:text-lg bg-transparent border border-gray-900 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
           />
           <textarea
-            placeholder="Your Message"
-            className="w-full px-4 md:px-5 py-3 text-base md:text-lg bg-transparent border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Message"
+            className="w-full px-4 md:px-5 py-3 text-base md:text-lg bg-transparent border border-gray-900 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
           ></textarea>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full py-3 md:py-4 text-base md:text-lg font-medium bg-gradient-to-r from-purple-500 to-blue-600 rounded-lg shadow-xl hover:opacity-80 transition border border-blue-400"
+            className="w-full py-3 md:py-4 text-base md:text-lg font-medium bg-gradient-to-r from-black to-gray-400 rounded-lg shadow-xl hover:opacity-80 transition border border-gray-700"
           >
             Send Message
           </motion.button>

@@ -4,9 +4,9 @@ import { X } from "lucide-react";
 
 const projectLinks = [
   { name: "Project Alpha", url: "https://example.com/alpha", description: "A cutting-edge AI project.", image: "https://via.placeholder.com/300" },
-  { name: "Project Beta", url: "https://example.com/beta", description: "An advanced data analytics tool.", image: "https://via.placeholder.com/300" },
-  { name: "Project Gamma", url: "https://example.com/gamma", description: "A revolutionary cloud-based service.", image: "https://via.placeholder.com/300" },
-  { name: "Project Delta", url: "https://example.com/delta", description: "Next-gen cybersecurity solutions.", image: "https://via.placeholder.com/300" },
+  { name: "Project Veta", url: "https://example.com/beta", description: "An advanced data analytics tool.", image: "https://via.placeholder.com/300" },
+  { name: "Project ITamma", url: "https://example.com/gamma", description: "A revolutionary cloud-based service.", image: "https://via.placeholder.com/300" },
+  { name: "Project SPelta", url: "https://example.com/delta", description: "Next-gen cybersecurity solutions.", image: "https://via.placeholder.com/300" },
 ];
 
 const GrokReplica = () => {
@@ -113,13 +113,13 @@ const GrokReplica = () => {
             <button onClick={() => setSelectedProject(null)} className="absolute top-3 right-3 text-gray-300 hover:text-white">
               <X size={20} />
             </button>
-            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-blue-400 tracking-wide uppercase">{selectedProject.name}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-400 tracking-wide uppercase">{selectedProject.name}</h2>
             <img src={selectedProject.image} alt={selectedProject.name} className="w-full h-40 object-cover rounded-lg shadow-md" />
             <p className="text-gray-300 text-lg leading-relaxed">{selectedProject.description}</p>
             <div className="relative">
               <button
                 onClick={() => handleButtonClick(selectedProject.url)}
-                className="relative block mt-4 text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-lg text-center shadow-lg hover:opacity-80 transition transform hover:scale-105 border border-blue-400"
+                className="relative block mt-4 text-white font-medium bg-gradient-to-r from-black to-blue-700 px-6 py-3 rounded-lg text-center shadow-lg hover:opacity-80 transition transform hover:scale-105 border border-gray-600"
               >
                 Explore the Project
               </button>

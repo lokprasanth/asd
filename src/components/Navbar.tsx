@@ -15,18 +15,23 @@ const Navbar = () => {
 
   return (
     <div className="fixed w-full top-5 flex justify-center z-50">
+      {/* Logo */}
+      <div className="absolute left-5 top-5 md:left-5 md:top-5 w-full flex md:justify-start justify-center">
+        <img src="/logo.png" alt="Logo" className="h-12 w-12 object-contain" />
+      </div>
+      
       {/* Desktop Navbar */}
       <motion.nav
-        className="hidden md:flex bg-gray-900/80 backdrop-blur-lg p-4 rounded-2xl shadow-lg border border-white/20 gap-3"
+        className="hidden md:flex bg-black backdrop-blur-lg p-4 rounded-md shadow-lg border border-white/20 gap-3"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        {["space", "universe", "stars", "detail"].map((item) => (
+        {["Home", "About", "Projects", "contact"].map((item) => (
           <motion.a
             key={item}
             href={`#${item.toLowerCase()}`}
-            className="text-white text-lg font-semibold px-4 py-2 rounded-lg bg-gray-700/60 uppercase tracking-wide transition-all"
+            className="text-white text-lg font-semibold px-4 py-2 rounded-lg bg-gray-700/50 uppercase tracking-wide transition-all"
             whileHover={{ scale: 1.1, background: "rgba(80, 80, 80, 0.9)", boxShadow: "0px 4px 20px rgba(100, 100, 100, 0.5)", color: "#fff" }}
             whileTap={{ scale: 0.95 }}
           >
@@ -55,7 +60,7 @@ const Navbar = () => {
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.4 }}
           >
-            {["Home", "About", "stars", "Contact"].map((item) => (
+            {["Home", "About", "Projects", "contact"].map((item) => (
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase()}`}

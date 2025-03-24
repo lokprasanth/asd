@@ -15,7 +15,7 @@ const Footer = () => {
               className="mb-6"
             >
               <h2 className="text-2xl font-bold text-white mb-4">
-                <span className="text-neon-blue">Neon</span>Flux
+                <span className="text-neon-blue">Lok</span>Flux
               </h2>
               <p className="text-gray-400 max-w-sm">
                 Creating cutting-edge digital experiences with futuristic design and advanced technology.
@@ -74,7 +74,7 @@ const Footer = () => {
           >
             <h3 className="text-white font-bold mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">hello@neonflux.design</li>
+              <li className="text-gray-400">hello@Lokflux.design</li>
               <li className="text-gray-400">+1 (555) 123-4567</li>
               <li className="text-gray-400">San Francisco, CA</li>
             </ul>
@@ -89,7 +89,7 @@ const Footer = () => {
           viewport={{ once: true }}
         >
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} NeonFlux. All rights reserved.
+            &copy; {new Date().getFullYear()} Lok Flux. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a href="#" className="text-gray-500 hover:text-neon-blue text-sm transition-colors">Privacy Policy</a>

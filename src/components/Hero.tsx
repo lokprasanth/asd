@@ -153,7 +153,7 @@ const Hero = () => {
           e.currentTarget.style.boxShadow = '0px 4px 20px rgba(255, 255, 255, 0.2)';
         }}
       >
-          Download 
+          Learn more 
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             width="20" 
