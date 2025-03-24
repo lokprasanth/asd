@@ -12,7 +12,6 @@ const projectLinks = [
 const GrokReplica = () => {
   const [particles, setParticles] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [sparks, setSparks] = useState([]);
   const [backgroundParticles, setBackgroundParticles] = useState([]);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ const GrokReplica = () => {
       }));
       setParticles(newParticles);
     };
-    
+
     const generateBackgroundParticles = () => {
       const newBackgroundParticles = Array.from({ length: 100 }).map((_, index) => ({
         id: index,
@@ -44,20 +43,14 @@ const GrokReplica = () => {
   }, []);
 
   const handleButtonClick = (url) => {
-    setSparks(
-      Array.from({ length: 20 }).map((_, index) => ({
-        id: index,
-        x: Math.random() * 100 - 50,
-        y: Math.random() * 100 - 50,
-        size: Math.random() * 6 + 3,
-      }))
-    );
-    setTimeout(() => setSparks([]), 800);
     setTimeout(() => window.open(url, "_blank"), 300);
   };
 
   return (
-    <section id="projects" className="bg-black text-white min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-10">
+    <section
+      id="projects"
+      className="bg-black text-white min-h-screen md:min-h-screen sm:min-h-[120vh] flex flex-col items-center justify-center relative overflow-hidden px-5 md:px-10"
+    >
       {/* Background Particles */}
       {backgroundParticles.map((particle) => (
         <motion.div
@@ -75,11 +68,12 @@ const GrokReplica = () => {
         />
       ))}
 
-      <h1 className="text-4xl font-bold text-blue-400 mb-6">Projects</h1>
-      <div className={`flex ${selectedProject ? 'justify-between' : 'justify-center'} items-center w-full max-w-6xl transition-all duration-500`}>
+      <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-6">Projects</h1>
+
+      <div className="flex flex-wrap justify-center items-center w-full max-w-6xl gap-6 transition-all duration-500">
         {/* Rotating Galaxy Effect */}
         <motion.div
-          className="relative w-96 h-96 flex items-center justify-center"
+          className="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center"
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
         >
@@ -97,7 +91,7 @@ const GrokReplica = () => {
                 {particle.project && (
                   <button
                     onClick={() => setSelectedProject(particle.project)}
-                    className="absolute w-8 h-8 bg-gray-800 text-white text-xs flex items-center justify-center rounded-md shadow-md hover:bg-gray-600"
+                    className="absolute w-12 h-12 md:w-8 md:h-8 bg-gray-800 text-white text-xs flex items-center justify-center rounded-md shadow-md hover:bg-gray-600 transition"
                     style={{ top: `-${particle.distance}px`, left: "50%", transform: "translateX(-50%)" }}
                   >
                     {particle.project.name}
@@ -114,16 +108,19 @@ const GrokReplica = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
-            className="w-96 bg-gradient-to-br from-black to-blue-900 p-6 rounded-2xl shadow-lg ml-10 relative border border-gray-600 text-white backdrop-blur-lg space-y-4 overflow-hidden"
+            className="w-full max-w-md bg-gradient-to-br from-black to-blue-900 p-6 rounded-2xl shadow-lg relative border border-gray-600 text-white backdrop-blur-lg space-y-4 overflow-hidden"
           >
             <button onClick={() => setSelectedProject(null)} className="absolute top-3 right-3 text-gray-300 hover:text-white">
               <X size={20} />
             </button>
-            <h2 className="text-3xl font-bold mb-2 text-blue-400 tracking-wide uppercase">{selectedProject.name}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-blue-400 tracking-wide uppercase">{selectedProject.name}</h2>
             <img src={selectedProject.image} alt={selectedProject.name} className="w-full h-40 object-cover rounded-lg shadow-md" />
             <p className="text-gray-300 text-lg leading-relaxed">{selectedProject.description}</p>
             <div className="relative">
-              <button onClick={() => handleButtonClick(selectedProject.url)} className="relative block mt-4 text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-lg text-center shadow-lg hover:opacity-80 transition transform hover:scale-105 border border-blue-400">
+              <button
+                onClick={() => handleButtonClick(selectedProject.url)}
+                className="relative block mt-4 text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 rounded-lg text-center shadow-lg hover:opacity-80 transition transform hover:scale-105 border border-blue-400"
+              >
                 Explore the Project
               </button>
             </div>

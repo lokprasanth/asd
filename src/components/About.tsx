@@ -113,13 +113,8 @@ const About = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="relative w-full h-[450px] rounded-2xl shadow-xl overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-              <img
-                src="https://unsplash.com/photos/blue-and-black-galaxy-digital-wallpaper-qtRF_RxCAo0"
-                alt="Futuristic Vision"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <img src="./public/.png" alt="Futuristic Vision" className="w-full h-full object-cover" />
+
           </motion.div>
 
           {/* Text Side */}
