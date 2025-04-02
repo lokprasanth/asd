@@ -32,28 +32,36 @@ const About = () => {
 
       {/* Small Background Planets */}
 {/* Small Background Planets - Realistic Colors with Fixed Positions & Proper Rotation */}
-{[...Array(8)].map((_, index) => {
+{[...Array(12)].map((_, index) => {
   const planetImages = [
-    "https://upload.wikimedia.org/wikipedia/commons/9/97/Mercury_in_true_color.jpg", // Mercury ⚪ (1st)
-    "https://upload.wikimedia.org/wikipedia/commons/8/85/Venus_globe.jpg", // Venus 🟡 (2nd)
-    "https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg", // Earth 🌍 (3rd)
-    "https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg", // Mars 🔴 (4th)
-    "https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg", // Jupiter 🟠 (5th)
-    "https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg", // Saturn 🟠 with rings (6th)
-    "https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg", // Uranus 🟣 (7th)
-    "https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg", // Neptune 🔵 (8th)
+    "https://pngimg.com/uploads/github/github_PNG28.png", // Mercury ⚪ (1st)
+    "https://img.freepik.com/premium-vector/3d-web-development-icon-with-bubble-speech-concept-website-developer-coding-with-software-engineer-computer-screen-web-page-3d-programming-vector-icon-render-illustration_412828-1600.jpg?ga=GA1.1.1115525540.1734690644&semt=ais_hybrid", // Venus 🟡 (2nd)
+    "https://img.freepik.com/premium-psd/html-3d-icon_498307-232.jpg", // Earth 🌍 (3rd)
+    "https://pbs.twimg.com/profile_images/1730334391501488129/G0R0sjHH_400x400.jpg", // Mars 🔴 (4th)
+    "https://static.vecteezy.com/system/resources/previews/022/100/657/non_2x/microsoft-excel-logo-transparent-free-png.png", // Jupiter 🟠 (5th)
+    "https://static.vecteezy.com/system/resources/previews/012/697/298/non_2x/3d-javascript-logo-design-free-png.png", // Saturn 🟠 with rings (6th)
+    "https://seeklogo.com/images/A/angular-icon-logo-9946B9795D-seeklogo.com.png", // Uranus 🟣 (7th)
+    "https://shopify.github.io/react-native-skia/img/logo.png", // Neptune 🔵 (8th)
+    "https://mir-s3-cdn-cf.behance.net/projects/404/ed144c99766163.Y3JvcCwxNTM0LDEyMDAsMzQsMA.png", // fig 🟤 (9th)
+    "https://static.vecteezy.com/system/resources/previews/012/697/297/original/3d-bootstrap-programming-framework-logo-free-png.png", // Proxima Centauri 🌟 (10th)
+    "https://static.vecteezy.com/system/resources/previews/012/697/295/non_2x/3d-python-programming-language-logo-free-png.png", // Eris ⚫ (11th)
+    "https://www.htx.gov.sg/images/default-source/news/2024/ai-article-1-banner-shot-min.jpg?sfvrsn=4b7c6915_1", // ai ⚪ (12th)
   ];
 
   // Fixed planet positions (from closest to farthest from Sun)
   const fixedPositions = [
     { top: "1%", left: "33%" }, // Mercury
     { top: "45%", left: "35%" }, // Venus
-    { top: "25%", left: "28%" }, // Earth
-    { top: "45%", left: "80%" }, // Mars
+    { top: "2%", left: "15%" }, // Earth
+    { top: "43%", left: "73%" }, // Mars
     { top: "55%", left: "50%" }, // Jupiter
     { top: "70%", left: "24%" }, // Saturn
-    { top: "85%", left: "5%" }, // Uranus
-    { top: "82%", left: "85%" }, // Neptune
+    { top: "89%", left: "5%" }, // Uranus
+    { top: "82%", left: "87%" }, // Neptune
+    { top: "5%", left: "84%" }, // fig
+    { top: "48%", left: "90%" }, // Proxima Centauri
+    { top: "39%", left: "3%" }, // Eris
+    { top: "15%", left: "58%" }, // ai
   ];
 
   return (

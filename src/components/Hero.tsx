@@ -174,70 +174,123 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Responsive Sun Effect */}
-      <div
-  className="sun-effect"
-  style={{
-    position: 'absolute',
-    top: '70%',
-    right: '-5vw', 
-    width: 'clamp(150px, 25vw, 300px)', 
-    height: 'clamp(150px, 25vw, 300px)', 
-    background: `
-      radial-gradient(circle, 
-        rgba(255, 230, 0, 1) 25%, 
-        rgba(255, 140, 0, 0.9) 50%, 
-        rgba(255, 60, 0, 0.8) 70%, 
-        rgba(100, 0, 0, 0.6) 85%, 
-        rgba(0, 0, 0, 0) 95%
-      ),
-      repeating-radial-gradient(circle, 
-        rgba(255, 200, 0, 0.6) 3%, 
-        rgba(255, 50, 0, 0.7) 7%, 
-        rgba(100, 0, 0, 0.4) 12%
-      ),
-      radial-gradient(circle at 30% 40%, 
-        rgba(255, 255, 255, 0.1) 5%, 
-        rgba(255, 100, 0, 0.2) 15%, 
-        rgba(0, 0, 0, 0) 50%
-      )
-    `,
-    borderRadius: '50%',
-    boxShadow: `
-      0px 0px 100px rgba(255, 200, 0, 0.9), 
-      0px 0px 140px rgba(255, 80, 0, 0.8),
-      0px 0px 180px rgba(255, 30, 0, 0.7)
-    `,
-    animation: 'burningEffect 2s infinite alternate ease-in-out, shapeWarp 4s infinite alternate ease-in-out',
-    transform: 'translateY(-50%)',
-    zIndex: 1,
-  }}
-></div>
+{/* Cyber Firewall Sun Effect */}
+<div className="firewall-sun">
+  <div className="sun-core"></div>
+  <div className="shield">
+    <div className="ring ring1"></div>
+    <div className="ring ring2"></div>
+    <div className="ring ring3"></div>
+  </div>
+  <div className="glitch-lines"></div>
+</div>
 
 <style>
   {`
-    @keyframes burningEffect {
-      0% {
-        filter: blur(6px) brightness(1);
-      }
-      50% {
-        filter: blur(9px) brightness(1.3);
-      }
-      100% {
-        filter: blur(6px) brightness(1);
-      }
+    /* Core Sun */
+    .firewall-sun {
+      position: absolute;
+      top: 50%;
+      right: -3vw;
+      width: clamp(150px, 25vw, 300px);
+      height: clamp(150px, 25vw, 300px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    @keyframes shapeWarp {
-      0% {
-        border-radius: 50%;
-      }
-      50% {
-        border-radius: 48% 52% 50% 52%;
-      }
-      100% {
-        border-radius: 50%;
-      }
+    .sun-core {
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, 
+        rgba(255, 150, 0, 1) 30%, 
+        rgba(255, 100, 0, 0.9) 55%, 
+        rgba(255, 50, 0, 0.7) 75%
+      );
+      border-radius: 50%;
+      box-shadow: 0px 0px 50px rgba(255, 140, 0, 0.9);
+      animation: glowPulse 2s infinite alternate ease-in-out;
+      position: relative;
+    }
+
+    /* Firewall Shield */
+    .shield {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 140, 0, 0.7);
+      animation: rotateRing 4s infinite linear;
+      background: radial-gradient(circle, rgba(255, 100, 0, 0.1) 20%, transparent 80%);
+      box-shadow: inset 0px 0px 10px rgba(255, 140, 0, 0.4);
+    }
+
+    .ring1 {
+      width: 90%;
+      height: 90%;
+      border-width: 3px;
+      animation-duration: 4s;
+    }
+
+    .ring2 {
+      width: 120%;
+      height: 120%;
+      border-width: 2px;
+      animation-duration: 6s;
+    }
+
+    .ring3 {
+      width: 150%;
+      height: 150%;
+      border-width: 1px;
+      animation-duration: 8s;
+    }
+
+    /* Grid-like glitch lines for a security feel */
+    .glitch-lines {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(rgba(255, 150, 0, 0.3) 2px, transparent 2px);
+      background-size: 100% 10px;
+      animation: glitchMove 2s infinite linear;
+      opacity: 0.3;
+    }
+
+    /* Animations */
+    @keyframes glowPulse {
+      0% { filter: blur(5px) brightness(1); }
+      50% { filter: blur(10px) brightness(1.4); }
+      100% { filter: blur(5px) brightness(1); }
+    }
+
+    @keyframes rotateRing {
+      0% { transform: rotate(0deg) scale(1); opacity: 1; }
+      50% { transform: rotate(180deg) scale(1.1); opacity: 0.8; }
+      100% { transform: rotate(360deg) scale(1); opacity: 1; }
+    }
+
+    @keyframes glitchMove {
+      0% { background-position-y: 0px; }
+      100% { background-position-y: -10px; }
+    }
+
+    /* Unlock Animation */
+    .firewall-unlocked .shield .ring {
+      animation: unlockRings 3s forwards ease-in-out;
+    }
+
+    @keyframes unlockRings {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+      100% { transform: scale(2); opacity: 0; }
     }
   `}
 </style>
