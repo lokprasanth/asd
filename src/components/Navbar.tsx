@@ -16,10 +16,13 @@ const Navbar = () => {
   return (
     <div className="fixed w-full top-5 flex justify-center z-50">
       {/* Logo */}
-      <div className="absolute left-5 top-5 md:left-5 md:top-5 w-full flex md:justify-start justify-center">
-        <img src="/logo.png" alt="Logo" className="h-12 w-12 object-contain" />
-      </div>
-      
+      <img
+  src="/LOK.png"
+  alt="Logo"
+  className="hidden md:block absolute top-0 left-12 h-24 w-24 object-contain"
+/>
+
+
       {/* Desktop Navbar */}
       <motion.nav
         className="hidden md:flex bg-black backdrop-blur-lg p-4 rounded-md shadow-lg border border-white/20 gap-3"
@@ -78,13 +81,15 @@ const Navbar = () => {
 
       {/* Visitor Count */}
       <motion.div
-        className="fixed top-5 right-5 bg-gray-900/90 text-white px-4 py-2 rounded-lg text-lg font-bold shadow-lg border border-white/20 flex items-center gap-2"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <User className="w-5 h-5" /> {visitorCount}
-      </motion.div>
+  className="fixed top-8 right-3 md:right-6 text-white text-sm font-medium flex items-center gap-1"
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+>
+  <User className="w-4 h-4" /> {visitorCount}
+</motion.div>
+
+
     </div>
   );
 };
