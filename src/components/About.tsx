@@ -30,7 +30,6 @@ const About = () => {
         />
       </div>
 
-      {/* Small Background Planets */}
 {/* Small Background Planets - Realistic Colors with Fixed Positions & Proper Rotation */}
 {[...Array(12)].map((_, index) => {
   const planetImages = [
@@ -51,7 +50,7 @@ const About = () => {
   // Fixed planet positions (from closest to farthest from Sun)
   const fixedPositions = [
     { top: "1%", left: "33%" }, // Mercury
-    { top: "45%", left: "35%" }, // Venus
+    { top: "23%", left: "40%" }, // Venus
     { top: "2%", left: "15%" }, // Earth
     { top: "43%", left: "73%" }, // Mars
     { top: "55%", left: "50%" }, // Jupiter
@@ -61,25 +60,28 @@ const About = () => {
     { top: "5%", left: "84%" }, // fig
     { top: "48%", left: "90%" }, // Proxima Centauri
     { top: "39%", left: "3%" }, // Eris
-    { top: "15%", left: "58%" }, // ai
+    { top: "15%", left: "59%" }, // ai
+    
   ];
-
+  const isDesktop = window.innerWidth >= 768;
+  const size = isDesktop ? 50 + index * 5 : 30 + index * 2;
+  
   return (
     <motion.div
       key={index}
       className="absolute opacity-90"
       style={{
-        width: `${40 + index * 10}px`, // Different sizes but fixed
-        height: `${40 + index * 10}px`,
-        top: fixedPositions[index].top, // Uses fixed positions
+        width: `${size}px`,
+        height: `${size}px`,
+        top: fixedPositions[index].top,
         left: fixedPositions[index].left,
         transform: "translate(-50%, -50%)",
-        borderRadius: "50%", // Keeps it circular
-        backgroundImage: `url(${planetImages[index]})`, // Uses real planet textures
+        borderRadius: "50%",
+        backgroundImage: `url(${planetImages[index]})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        filter: "brightness(1.1) contrast(1.2)", // Enhances visibility
-        boxShadow: `0 0 15px rgba(255, 255, 255, 0.3)`, // Soft glow
+        filter: "brightness(1.1) contrast(1.2)",
+        boxShadow: `0 0 15px rgba(255, 255, 255, 0.3)`,
       }}
       animate={{
         y: [-5, 5, -5], // Floating motion
@@ -121,7 +123,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-          <img src="./public/.png" alt="Futuristic Vision" className="w-full h-full object-cover" />
+          <img src="./lp.png" alt="Futuristic Vision" className="w-full h-full object-cover" />
 
           </motion.div>
 
