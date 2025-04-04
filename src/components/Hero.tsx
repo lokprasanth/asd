@@ -40,24 +40,28 @@ const GlowingAura = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const colors = [
-      "rgba(0, 255, 255, 0.9)",
-      "rgba(0, 206, 209, 0.8)",
-      "rgba(0, 191, 255, 0.7)",
-      "rgba(64, 224, 208, 0.6)"
+    const baseColors = [
+      ["rgba(0, 255, 255, 0.9)", "rgba(0, 206, 209, 0.8)", "rgba(0, 191, 255, 0.7)", "rgba(64, 224, 208, 0.6)"],
+      ["rgba(255, 0, 150, 0.9)", "rgba(255, 100, 200, 0.8)", "rgba(200, 50, 255, 0.7)", "rgba(150, 0, 255, 0.6)"],
+      ["rgba(255, 165, 0, 0.9)", "rgba(255, 140, 0, 0.8)", "rgba(255, 120, 0, 0.7)", "rgba(255, 100, 0, 0.6)"]
     ];
 
+    let colorIndex = 0;
     let waves = [];
-    for (let i = 0; i < 5; i++) {
-      waves.push({
-        baseRadius: 120 + i * 18,
-        amplitude: 12 + i * 4,
-        frequency: 0.06 + i * 0.005,
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.015 + i * 0.002,
-        color: colors[i % colors.length],
-        width: 3 + i * 0.4
-      });
+
+    function createWaves() {
+      waves = [];
+      for (let i = 0; i < 5; i++) {
+        waves.push({
+          baseRadius: 120 + i * 18,
+          amplitude: 12 + i * 4,
+          frequency: 0.06 + i * 0.005,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.015 + i * 0.002,
+          color: baseColors[colorIndex % baseColors.length][i % 4],
+          width: 3 + i * 0.4
+        });
+      }
     }
 
     function drawAura() {
@@ -86,20 +90,34 @@ const GlowingAura = () => {
       requestAnimationFrame(drawAura);
     }
 
+    createWaves();
     drawAura();
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
-    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
+    const handleScroll = () => {
+      let scrollPos = window.scrollY;
+      let newColorIndex = Math.floor(scrollPos / 200) % baseColors.length;
+      if (newColorIndex !== colorIndex) {
+        colorIndex = newColorIndex;
+        createWaves();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return <canvas ref={canvasRef} style={{ position: "absolute", top: 0, left: 0, zIndex: 0 }} />;
-};
-
+};    
 const Hero = () => {
   const [emoji, setEmoji] = useState("✨");
   const [backgroundParticles, setBackgroundParticles] = useState([]);
