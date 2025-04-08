@@ -123,7 +123,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-          <img src="./lp.png" alt="Futuristic Vision" className="w-full h-full object-cover" />
+          <img src="./lp.png" alt="Description" style={{ width: '69%', height: 'auto' ,opacity:0.7}} />
 
           </motion.div>
 
