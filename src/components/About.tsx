@@ -123,7 +123,19 @@ const About = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-          <img src="./lp.png" alt="Description" style={{ width: '69%', height: 'auto' ,opacity:0.7}} />
+                        <img
+              src="./lp.png"
+              alt="Description"
+              style={{
+                width: '69%',
+                maxWidth: '100%',
+                height: 'auto',
+                opacity: 0.7,
+                display: 'block',
+                marginLeft: 'auto',
+                marginRight: 'auto'
+              }}
+            />
 
           </motion.div>
 
