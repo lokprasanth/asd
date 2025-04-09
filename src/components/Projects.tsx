@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 const projectLinks = [
-  { name: "Project Alpha", url: "https://example.com/alpha", description: "A cutting-edge AI project.", image: "https://via.placeholder.com/300" },
-  { name: "Project Veta", url: "https://example.com/beta", description: "An advanced data analytics tool.", image: "https://via.placeholder.com/300" },
-  { name: "Project ITamma", url: "https://example.com/gamma", description: "A revolutionary cloud-based service.", image: "https://via.placeholder.com/300" },
-  { name: "Project SPelta", url: "https://example.com/delta", description: "Next-gen cybersecurity solutions.", image: "https://via.placeholder.com/300" },
+  { name: "iTNT HUB Project", url: "https://itnthub.tn.gov.in/", description: "iTNT is building India’s largest Emerging & Deep Tech Innovation Network by connecting startups, researchers, and institutions. Website proudly created by me.", image: "./itnt.png" },
+  { name: "Vitti Living ", url: "https://vittiliving.com/", description: "VITTI Living – Premium, custom home furniture crafted with style and precision,developed by me.", image: "./vitti.png" },
+  { name: "Speed Exam", url: "https://speedexamwebsite.ldev.in/", description: "A secure, reliable online exam portal used in 127+ countries—streamlining recruitment with seamless testing,developed by me.", image: "./speed.png" },
+  { name: "upcoming Project ", url: "https://example.com/delta", description: "Next-gen cybersecurity solutions.", image: "https://via.placeholder.com/300" },
+  { name: "Vitti Living ", url: "https://vittiliving.com/", description: "VITTI Living – Premium, custom home furniture crafted with style and precision,developed by me.", image: "./vitti.png" },
+
 ];
 
 const GrokReplica = () => {
@@ -68,7 +70,7 @@ const GrokReplica = () => {
         />
       ))}
 
-      <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-6">Projects</h1>
+      <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-6">Projects</h1>
 
       <div className="flex flex-wrap justify-center items-center w-full max-w-6xl gap-6 transition-all duration-500">
         {/* Rotating Galaxy Effect */}
@@ -108,7 +110,7 @@ const GrokReplica = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
-            className="w-full max-w-md bg-gradient-to-br from-black to-blue-900 p-6 rounded-2xl shadow-lg relative border border-gray-600 text-white backdrop-blur-lg space-y-4 overflow-hidden"
+            className="w-full max-w-md bg-gradient-to-br from-black to-blue-400 p-6 rounded-2xl shadow-lg relative border border-gray-600 text-white backdrop-blur-lg space-y-4 overflow-hidden"
           >
             <button onClick={() => setSelectedProject(null)} className="absolute top-3 right-3 text-gray-300 hover:text-white">
               <X size={20} />
