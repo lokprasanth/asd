@@ -129,7 +129,9 @@ const GrokReplica = () => {
       ))}
   
       {/* 1. HEADER */}
-     
+      <h1 className="text-5xl md:text-5xl font-extrabold text-white mb-9 mt-20 lg:mt-4 z-10">
+        Projects
+      </h1>
   
       {/* 2. HUMAN VIEWER */}
       <div className="z-10 mb-1">
@@ -144,9 +146,7 @@ const GrokReplica = () => {
         </motion.div>
       </div>
 
-      <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-9 lg:mt-4 z-10">
-        Projects
-      </h1>
+      
       
       {/* 3. GALAXY PANEL & PROJECT DETAILS */}
       <div className="flex flex-wrap justify-center items-center w-full max-w-6xl gap-6 mb-16 transition-all duration-500 z-10">

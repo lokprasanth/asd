@@ -25,7 +25,7 @@ const Navbar = () => {
 
       {/* Desktop Navbar */}
       <motion.nav
-        className="hidden md:flex bg-black backdrop-blur-lg p-4 rounded-md shadow-lg border border-white/20 gap-3"
+        className="hidden md:flex bg-transparent backdrop-blur-sm p-4 rounded-md shadow-lg border border-white/20 gap-3"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
