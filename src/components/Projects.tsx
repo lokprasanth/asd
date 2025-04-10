@@ -140,16 +140,16 @@ const GrokReplica = () => {
           className="p-9"
         >
           <HumanViewer />
-          <p className="text-center text-xs text-blue-300">Lok</p>
+          <p className="text-center font-extrabold text-xs -mt-20 text-blue-300">Lok Alamanda</p>
         </motion.div>
       </div>
 
-      <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-9 z-10">
+      <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-9 lg:mt-4 z-10">
         Projects
       </h1>
       
       {/* 3. GALAXY PANEL & PROJECT DETAILS */}
-      <div className="flex flex-wrap justify-center items-center w-full max-w-6xl gap-6 transition-all duration-500 z-10">
+      <div className="flex flex-wrap justify-center items-center w-full max-w-6xl gap-6 mb-16 transition-all duration-500 z-10">
         <motion.div
           className="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center"
           animate={{ rotate: 360 }}
