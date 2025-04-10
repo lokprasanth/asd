@@ -109,8 +109,7 @@ const About = () => {
             Beyond Limits.
           </h2>
           <p className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto leading-relaxed">
-            Immersive digital experiences blending motion, interactivity, and design innovation.
-          </p>
+          Creating immersive digital experiences that seamlessly blend motion, interactivity, and design innovation to deliver engaging, cutting-edge solutions.          </p>
         </motion.div>
 
         {/* 3D Interactive Grid */}
@@ -149,17 +148,18 @@ const About = () => {
           >
             <h3 className="text-4xl font-semibold text-white drop-shadow-md">Who Am I?</h3>
             <p className="text-gray-400 text-lg leading-relaxed">
-              A creative visionary, shaping futuristic interfaces and engaging digital experiences.
-            </p>
+            I am a creative visionary, shaping futuristic interfaces and crafting engaging digital experiences that push the boundaries of design and technology            </p>
             <p className="text-gray-400 text-lg">
-              Whether it’s <span className="text-purple-400">UI/UX</span>, <span className="text-blue-400">web development</span>, or <span className="text-pink-400">motion design</span>, my goal is to craft experiences that feel intuitive and powerful.
+              Whether it’s <span className="text-purple-400">UI/UX</span>, <span className="text-blue-400">web development</span>, or <span className="text-pink-400">motion design</span>, my goal is to create experiences that are not only intuitive but also powerful.
+
+
             </p>
           </motion.div>
         </div>
 
         {/* Floating 3D Stats */}
         <div className="flex flex-wrap justify-center mt-20 gap-12">
-          {[{ title: "Projects", number: "50+" }, { title: "planets", number: "678" }, { title: "Happys", number: "100%" }].map((stat, index) => (
+          {[{ title: "Experience", number: "2" }, { title: "Qualification", number: "BTech" }, { title: "Satisfaction", number: "100%" }].map((stat, index) => (
             <motion.div
               key={index}
               className="text-center bg-opacity-30 bg-gray-800 rounded-2xl p-8 backdrop-blur-lg shadow-2xl border border-gray-700 hover:scale-110 hover:shadow-gray-500 transition-transform duration-500 animate-float"
