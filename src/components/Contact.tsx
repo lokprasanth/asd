@@ -8,15 +8,15 @@ const achievements = [
     subtitle: "Recognized Achievement in ITNT Hub Website Development (Government Project)",
     description:
       "Successfully developed and launched the official website for the ITNT Hub, a government initiative. The project involved designing a user-centric interface, ensuring seamless functionality, and adhering to the highest standards of performance and security. This achievement demonstrates dedication to delivering impactful digital solutions for government projects and reflects a commitment to quality and innovation.",
-    image: "./lp.png",
-    link: "https://yourdomain.com/docs/quantum-vision-cert.pdf",
+    image: "https://img.freepik.com/free-vector/abstract-coming-soon-halftone-style-background-design_1017-27282.jpg",
+    link: "https://images.pexels.com/photos/4439444/pexels-photo-4439444.jpeg?cs=srgb&dl=pexels-vie-studio-4439444.jpg&fm=jpg",
   },
   {
     title: "Google Digital Marketing",
     subtitle: " Google Digital Marketing Certification fundamental",
     description:
       "Successfully completed the Google Digital Marketing Certification, gaining comprehensive knowledge and skills in digital marketing strategies. This certification covers key areas such as search engine optimization (SEO), pay-per-click (PPC) advertising, social media marketing, and data analytics. This achievement reflects my commitment to staying updated with the latest trends in digital marketing and my ability to implement effective strategies to drive online growth and engagement.",
-    image: "./lp.png",
+    image: "https://img.freepik.com/free-vector/abstract-coming-soon-halftone-style-background-design_1017-27282.jpg",
     link: "https://yourdomain.com/docs/quantum-vision-cert.pdf",
   },
   {
@@ -24,7 +24,7 @@ const achievements = [
     subtitle: "Achievement in Full Stack Development Certification (Udemy)",
     description:
       "Successfully completed the Full Stack Development course on Udemy, gaining in-depth knowledge and hands-on experience in both front-end and back-end technologies. The course covered key areas such as HTML, CSS, JavaScript,Angular,Python and more, equipping me with the skills to build dynamic and scalable web applications. This certification demonstrates my proficiency in full-stack development and my ability to create robust, high-performance websites and applications.",
-    image: "./lp.png",
+    image: "https://www.nopcommerce.com/images/thumbs/0005720_coming-soon-page_550.jpeg",
   },
 ];
 
