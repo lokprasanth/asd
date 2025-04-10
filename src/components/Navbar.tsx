@@ -30,7 +30,7 @@ const Navbar = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        {["Home", "About", "Projects", "contact"].map((item) => (
+        {["Home", "About", "Projects", "Achievements"].map((item) => (
           <motion.a
             key={item}
             href={`#${item.toLowerCase()}`}
@@ -63,7 +63,7 @@ const Navbar = () => {
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.4 }}
           >
-            {["Home", "About", "Projects", "contact"].map((item) => (
+            {["Home", "About", "Projects", "Achievements"].map((item) => (
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase()}`}
