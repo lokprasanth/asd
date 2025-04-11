@@ -121,7 +121,7 @@ const GlowingAura = () => {
 const Hero = () => {
   const [emoji, setEmoji] = useState("✨");
   const [backgroundParticles, setBackgroundParticles] = useState([]);
-  const texts = ["ai asssistance", "Think Different.", "Create the Future.", "Innovate Boldly."];
+  const texts = ["Web Devloper","Think Different.", "Freelancer", "Create the Future", "Innovate Boldly."];
   let textIndex = 0;
 
   useEffect(() => {
@@ -223,6 +223,22 @@ const Hero = () => {
           Innovation that redefines the way you think, work, and create. {emoji}
         </motion.p>
       </div>
+      <motion.button
+  whileHover={{ scale: 1.1, boxShadow: "0px 0px 20px rgba(0,255,255,0.6)" }}
+  whileTap={{ scale: 0.95 }}
+  onClick={() => {
+    const link = document.createElement("a");
+    link.href = "./Lok_Prasanth.docx.pdf";
+    link.download = "Lok.Alamanda_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }}
+  className="mt-4 px-6 py-3 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-900 text-white font-semibold shadow-md backdrop-blur-md border border-cyan-400 transition-all duration-300"
+>
+  Download Resume 🚀 
+</motion.button>
+
     </section>
   );
 };

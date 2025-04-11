@@ -209,7 +209,7 @@ const GrokReplica = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
-            className="w-full max-w-md bg-gradient-to-br from-black to-blue-400 p-6 rounded-2xl shadow-lg relative border border-gray-600 text-white backdrop-blur-lg space-y-4 overflow-hidden"
+            className="w-full max-w-md bg-gradient-to-br from-black  p-6 rounded-2xl shadow-lg relative border border-gray-600 text-white backdrop-blur-lg space-y-4 overflow-hidden"
           >
             <button
               onClick={() => setSelectedProject(null)}
@@ -231,7 +231,7 @@ const GrokReplica = () => {
             <div className="relative">
               <button
                 onClick={() => handleButtonClick(selectedProject.url)}
-                className="relative block mt-4 text-white font-medium bg-gradient-to-r from-black to-blue-700 px-6 py-3 rounded-lg text-center shadow-lg hover:opacity-80 transition transform hover:scale-105 border border-gray-600"
+                className="relative block mt-4 text-white font-medium bg-gradient-to-r from-teal-500 to-cyan-900 px-6 py-3 rounded-lg text-center shadow-lg hover:opacity-80 transition transform hover:scale-105 border border-gray-600"
               >
                 Explore the Project
               </button>
